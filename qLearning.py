@@ -12,7 +12,9 @@ numEpisodes = 10000
 
 returnSum = 0.0
 actions = [0,1]
-
+alpha
+epsilon
+gamma
 
 for episodeNum in range(numEpisodes):
     s = blackjack.init();
@@ -20,10 +22,12 @@ for episodeNum in range(numEpisodes):
     while (s != -1):
     	a = random_policy (actions)
         result = blackjack.sample (s,a)
-        #print blackjack.sample (0, 1)
+        #Q(S, A) = Q(S, A) + [R + gamma * max(Q(S1, A1)) - Q(S, A)]
         G = G + result[0]
         s = result[1]
     print "Episode: ", episodeNum, "Return: ", G
     returnSum = returnSum + G
 
 print "Average return: ", returnSum/numEpisodes
+
+
