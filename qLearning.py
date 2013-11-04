@@ -15,14 +15,13 @@ actions = [0,1]
 alpha
 epsilon
 gamma
-
+Q = numpy.zeros(181, len(actions))
 for episodeNum in range(numEpisodes):
     s = blackjack.init();
     G = 0
     while (s != -1):
-    	a = random_policy (actions)
+    	a = numpy
         result = blackjack.sample (s,a)
-        #Q(S, A) = Q(S, A) + [R + gamma * max(Q(S1, A1)) - Q(S, A)]
         G = G + result[0]
         s = result[1]
     print "Episode: ", episodeNum, "Return: ", G
