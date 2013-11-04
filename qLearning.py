@@ -15,15 +15,17 @@ actions = [0,1]
 alpha
 epsilon
 gamma
-Q = numpy.zeros(181, len(actions))
+Q = numpy.zeros((181, len(actions)))
 for episodeNum in range(numEpisodes):
     s = blackjack.init();
+    #do an epsilon check and else proceed to policy
+    
     G = 0
     while (s != -1):
-    	a = numpy
+    	a = argmax(numpy[s, :])
         result = blackjack.sample (s,a)
-        G = G + result[0]
-        s = result[1]
+        #G = G + result[0]
+        #s = result[1]
     print "Episode: ", episodeNum, "Return: ", G
     returnSum = returnSum + G
 
