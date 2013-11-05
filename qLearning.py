@@ -12,22 +12,32 @@ numEpisodes = 10000
 
 returnSum = 0.0
 actions = [0,1]
-alpha
-epsilon
-gamma
+alpha = 0.001
+epsilon = 1
+gamma = 1
 Q = numpy.zeros((181, len(actions)))
 for episodeNum in range(numEpisodes):
     s = blackjack.init();
-    #do an epsilon check and else proceed to policy
-    
     G = 0
     while (s != -1):
-    	a = argmax(numpy[s, :])
+        i = random.uniform(0, 1)
+        #do an epsilon check, random policy or else proceed to policy
+        if (i <= epsilon){
+            a = ramdom_policy(actions)
+        }
+        else{ 
+            a = argmax(Q[s, :])
+        }
         result = blackjack.sample (s,a)
-        #G = G + result[0]
-        #s = result[1]
-    print "Episode: ", episodeNum, "Return: ", G
+        s_ = result[1]
+        G = result[0]
+        Q[s, a] = Q[s, a] + alpha * (result[0] + (gamma * max (Q[s_:])) - Q(s, a)
+        s = s_
     returnSum = returnSum + G
+    if (episodeNum % 10000 == 0){    
+        print "Episode: ", episodeNum, "Average Return: ", returnSum/episodeNum
+        }
+
 
 print "Average return: ", returnSum/numEpisodes
 
