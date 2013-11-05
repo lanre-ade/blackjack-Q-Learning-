@@ -8,12 +8,12 @@ def random_policy (list_of_actions): #returns a random action from a list of pos
     #print next_action
     return next_action
 
-numEpisodes = 100000
+numEpisodes = 1000000
 
 returnSum = 0.0
 actions = [0,1]
 alpha = 0.001
-epsilon = 1
+epsilon = 0.00001
 gamma = 1
 Q = np.zeros((181, len(actions)))
 for episodeNum in range(numEpisodes):
@@ -40,5 +40,8 @@ for episodeNum in range(numEpisodes):
 
 if (episodeNum > 0 ): print "Average return: ", returnSum/numEpisodes
 else :print "Average return: 0"
+
+
+#blackjack.printPolicy()
 
 

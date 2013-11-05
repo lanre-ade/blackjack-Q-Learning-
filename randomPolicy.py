@@ -29,5 +29,7 @@ for episodeNum in range(numEpisodes):
 print "Average return: ", returnSum/numEpisodes
 
 
+printPolicy(Q)
+	
 
 
