@@ -1,21 +1,25 @@
+
 import blackjack
 from random import choice
 from pylab import *
 from numpy import *
 
 def random_policy (list_of_actions): #returns a random action from a list of possible actions
-    next_action = choice(list_of_actions)
-    #print next_action
-    return next_action
+    return choice(list_of_actions)
 
-numEpisodes = 100000
+def policy(s):
+    return argmax(Q[s, :])
 
+numEpisodes = 10000000
 returnSum = 0.0
 actions = [0,1]
 alpha = 0.001
-epsilon = 0.00001
+epsilon = 0.3 
 gamma = 1
-Q = np.zeros((181, len(actions)))
+Q = 0.00001*rand(181,2)
+
+print "Epsilon: ", epsilon, "Alpha: ", alpha
+
 for episodeNum in range(numEpisodes):
     s = blackjack.init();
     G = 0
@@ -25,8 +29,7 @@ for episodeNum in range(numEpisodes):
         if (i <= epsilon):
             a = random_policy(actions)
         else: 
-            a = argmax(Q[s, :])
-        
+            a = policy(s)
         result = blackjack.sample (s,a)
         s_ = result[1]
         G = result[0]
@@ -35,17 +38,11 @@ for episodeNum in range(numEpisodes):
     returnSum = returnSum + G
     if (episodeNum % 10000 == 0 and episodeNum > 0):    
         print "Episode: ", episodeNum, "Average Return: ", returnSum/episodeNum
-        
-
 
 if (episodeNum > 0 ): print "Average return: ", returnSum/numEpisodes
 else :print "Average return: 0"
 
-
-#blackjack.printPolicy()
-def policy(s):
-    return argmax(Q[s, :])
+blackjack.printPolicy(policy)
     
     
     
-
