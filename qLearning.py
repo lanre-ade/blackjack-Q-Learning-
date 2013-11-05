@@ -8,7 +8,7 @@ def random_policy (list_of_actions): #returns a random action from a list of pos
     #print next_action
     return next_action
 
-numEpisodes = 1000000
+numEpisodes = 100000
 
 returnSum = 0.0
 actions = [0,1]
@@ -43,5 +43,9 @@ else :print "Average return: 0"
 
 
 #blackjack.printPolicy()
-
+def policy(s):
+    return argmax(Q[s, :])
+    
+    
+    
 
